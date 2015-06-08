@@ -84,7 +84,7 @@ public  class JDBCConnection {
         try{
            Statement stmt = conn.createStatement();
       String sql;
-      sql = "SELECT distinct "+type+" FROM jenudai";
+      sql = "SELECT distinct "+type+" FROM jenudai where "+type+"!='NULL'";
       ResultSet rs = stmt.executeQuery(sql);
 
       //STEP 5: Extract data from result set
@@ -102,20 +102,21 @@ public  class JDBCConnection {
         try{
            Statement stmt = conn.createStatement();
       String sql;
-      sql = "SELECT SUM(total) FROM jenudai where type='"+type+"'";
-            System.out.println("sql"+sql);
-      String sql1="SELECT SUM(cash) FROM jenudai where type='"+type+"'";
+      sql = "SELECT SUM(cash) FROM jenudai where type='"+type+"' AND flag=1";
+      String sql1="SELECT SUM(credit) FROM jenudai where type='"+type+"' AND flag=1";
       ResultSet rs = stmt.executeQuery(sql);
       float sum=0;
       
 
       //STEP 5: Extract data from result set
       while(rs.next()){
+          if(rs.getString(1)!=null)
           sum=Float.parseFloat(rs.getString(1));
       }
       rs=stmt.executeQuery(sql1);
       if(rs.next()){
-          sum+=Float.parseFloat(rs.getString(1));
+          if(rs.getString(1)!=null)
+            sum+=Float.parseFloat(rs.getString(1));
       }
       
       name.setText(String.valueOf(sum));
@@ -126,9 +127,10 @@ public  class JDBCConnection {
       se.printStackTrace();
         }
     }
-   public static void loadData(javax.swing.JTable name,String actualQuery){
+   public static void loadData(javax.swing.JTable name,String actualQuery,String groupBy,int flag){
         String sql="";
-        sql = "select "+actualQuery+" from jenudai group by goods;";
+        sql = "select "+actualQuery+" from jenudai WHERE flag="+flag+" group by "+groupBy;
+        System.out.println("sql"+sql);
 
         try{
             Statement  stmt = conn.createStatement();

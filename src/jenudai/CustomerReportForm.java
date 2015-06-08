@@ -16,7 +16,7 @@ public class CustomerReportForm extends javax.swing.JFrame {
      */
     public CustomerReportForm() {
         initComponents();
-        JDBCConnection.loadData(customerTable," customer,sum(cash) as cash,sum(credit) as credits");
+        JDBCConnection.loadData(customerTable," customer,type,sum(cash) as cash,sum(credit) as credits","customer,type",1);
     }
 
     /**

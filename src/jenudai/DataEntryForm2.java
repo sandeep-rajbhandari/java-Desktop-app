@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import javax.swing.table.DefaultTableModel;
 import static jenudai.JDBCConnection.conn;
 
@@ -31,6 +32,21 @@ public class DataEntryForm2 extends javax.swing.JFrame {
 
         JDBCConnection.populate(itemsDropDown,"goods");
         JDBCConnection.populate(customerdrop, "customer");
+        
+        Calendar today = Calendar.getInstance();
+        jDateChooser1.setDate(today.getTime());
+        
+    }
+    
+    public DataEntryForm2(String invoice,String Customer) {
+        initComponents();
+        model=(DefaultTableModel)jTable1.getModel();
+
+//        JDBCConnection.populate(itemsDropDown,"goods");
+//        JDBCConnection.populate(customerdrop, "customer");
+        invoicebox.setText(invoice);
+        customerBox.setText(Customer);
+        jTable1.disable();
         
     }
     
@@ -79,7 +95,7 @@ public class DataEntryForm2 extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"fan", "23", "1", null},
+                {"", "", "", null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -104,6 +120,7 @@ public class DataEntryForm2 extends javax.swing.JFrame {
 
         jLabel4.setText("Cash");
 
+        cash.setText("0");
         cash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cashActionPerformed(evt);
@@ -129,6 +146,13 @@ public class DataEntryForm2 extends javax.swing.JFrame {
         customerBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 customerBoxActionPerformed(evt);
+            }
+        });
+
+        jTextField4.setText("0");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
             }
         });
 
@@ -227,7 +251,6 @@ public class DataEntryForm2 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(88, 88, 88)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(total)
@@ -237,7 +260,7 @@ public class DataEntryForm2 extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -355,15 +378,23 @@ public class DataEntryForm2 extends javax.swing.JFrame {
          for(i=0;i<model.getRowCount();i++){
            try{
                String s=model.getValueAt(i,0).toString();
+               if(model.getValueAt(i,0).toString()==""){
+                 break;
+             }
            }
            catch(Exception ex){
                    break;
            }
+             
          }
           model.setValueAt(itemsDropDown.getSelectedItem(), i, 0);
 
         
     }//GEN-LAST:event_itemsDropDownActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
     /**
      * @param args the command line arguments

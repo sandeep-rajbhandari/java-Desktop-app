@@ -116,7 +116,7 @@ public class GenerateReport extends javax.swing.JFrame {
         // TODO add your handling code here:
         CustomerReportForm customerReportForm=new CustomerReportForm();
         customerReportForm.setVisible(true);
-         customerReportForm.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        customerReportForm.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

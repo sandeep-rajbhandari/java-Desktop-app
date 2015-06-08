@@ -16,7 +16,7 @@ public class StockForm extends javax.swing.JFrame {
      */
     public StockForm() {
         initComponents();
-        JDBCConnection.loadData(stockTable,"goods,sum(qty) as quantity");
+        JDBCConnection.loadData(stockTable,"goods,sum(qty) as quantity","goods",0);
     }
 
     /**

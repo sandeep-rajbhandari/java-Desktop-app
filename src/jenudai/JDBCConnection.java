@@ -102,9 +102,9 @@ public  class JDBCConnection {
         try{
            Statement stmt = conn.createStatement();
       String sql;
-//      sql = "SELECT SUM(total) FROM jenudai where type='"+type+"' AND flag=1";
-            sql = "SELECT SUM(total) FROM jenudai where type='BUY' AND flag=1";
-
+      sql = "SELECT SUM(total) FROM jenudai where type='"+type+"'";
+            System.out.println("sql"+sql);
+      String sql1="SELECT SUM(cash) FROM jenudai where type='"+type+"'";
       ResultSet rs = stmt.executeQuery(sql);
       float sum=0;
       
@@ -113,7 +113,10 @@ public  class JDBCConnection {
       while(rs.next()){
           sum=Float.parseFloat(rs.getString(1));
       }
-      
+      rs=stmt.executeQuery(sql1);
+      if(rs.next()){
+          sum+=Float.parseFloat(rs.getString(1));
+      }
       
       name.setText(String.valueOf(sum));
 

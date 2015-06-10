@@ -129,7 +129,12 @@ public  class JDBCConnection {
     }
    public static void loadData(javax.swing.JTable name,String actualQuery,String groupBy,int flag){
         String sql="";
-        sql = "select "+actualQuery+" from jenudai WHERE flag="+flag+" group by "+groupBy;
+        if(groupBy==null){
+            sql = "select * from jenudai WHERE flag="+flag+" AND invoice="+actualQuery;
+        }else{
+             sql = "select "+actualQuery+" from jenudai WHERE flag="+flag+" group by "+groupBy;
+  
+        }
         System.out.println("sql"+sql);
 
         try{

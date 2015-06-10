@@ -315,7 +315,7 @@ public class DataEntryForm2 extends javax.swing.JFrame {
         for(int i=0;i<model.getRowCount();i++){
         try{
         PreparedStatement updateemp = JDBCConnection.conn.prepareStatement
-        ("insert into jenudai values(?,?,?,?,?,?,?,?,?,?,?)");
+        ("insert into jenudai(Date,invoice,goods,qty,customer,type,pricePerUnit,total,flag,cash,credit) values(?,?,?,?,?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
         updateemp.setDate(1,date);
         updateemp.setString(2,invoice);
         updateemp.setString(3,model.getValueAt(i,0).toString());
@@ -340,7 +340,7 @@ public class DataEntryForm2 extends javax.swing.JFrame {
         }
         try{
         PreparedStatement updateemp = JDBCConnection.conn.prepareStatement
-        ("insert into jenudai values(?,?,?,?,?,?,?,?,?,?,?)");
+        ("insert into jenudai(Date,invoice,goods,qty,customer,type,pricePerUnit,total,flag,cash,credit) values(?,?,?,?,?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
         updateemp.setDate(1,date);
         updateemp.setString(2,invoice);
         updateemp.setString(3,null);

@@ -36,20 +36,29 @@ public class ViewRecords extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
+        allButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        loadButton = new javax.swing.JButton();
+        addAmountButton = new javax.swing.JButton();
+        viewBillButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
+
+        Delete.setText("Delete");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("All");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        allButton.setText("All");
+        allButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                allButtonActionPerformed(evt);
             }
         });
 
@@ -71,24 +80,31 @@ public class ViewRecords extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("Load");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        loadButton.setText("Load");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                loadButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Add Amount");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        addAmountButton.setText("Add Amount");
+        addAmountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                addAmountButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setText("View bill");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        viewBillButton.setText("View bill");
+        viewBillButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                viewBillButtonActionPerformed(evt);
+            }
+        });
+
+        updateButton.setText("update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
             }
         });
 
@@ -97,18 +113,20 @@ public class ViewRecords extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(addAmountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(viewBillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(allButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 846, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,11 +134,12 @@ public class ViewRecords extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4))
+                        .addComponent(allButton)
+                        .addComponent(addAmountButton)
+                        .addComponent(viewBillButton)
+                        .addComponent(updateButton))
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(loadButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -128,41 +147,62 @@ public class ViewRecords extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void allButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allButtonActionPerformed
         // TODO add your handling code here:
        loadData(true);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_allButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         // TODO add your handling code here
         loadData(false);
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_loadButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void addAmountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAmountButtonActionPerformed
         // TODO add your handling code here:
         int[] selectedRow = jTable1.getSelectedRows();
         DataEntryForm2 dataEntryForm2=new DataEntryForm2(jTable1.getValueAt(selectedRow[0], 1).toString(),
-                jTable1.getValueAt(selectedRow[0],5).toString());
+                jTable1.getValueAt(selectedRow[0],2).toString());
         dataEntryForm2.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_addAmountButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void viewBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBillButtonActionPerformed
         // TODO add your handling code here:
          int[] selectedRow = jTable1.getSelectedRows();
-         JDBCConnection.loadData(jTable1, jTable1.getValueAt(selectedRow[0],1).toString(), null, 0);
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
+         try{ 
+        JDBCConnection.loadData(jTable1, jTable1.getValueAt(selectedRow[0],1).toString(), null, 0);
+         }
+         catch(Exception e){
+             try{
+          JDBCConnection.loadData(jTable1, jTable1.getValueAt(0,1).toString(), null, 0);
+             }
+             catch(Exception b){
+                 System.out.println("data not loaded");
+             }
+         }
+         
+    }//GEN-LAST:event_viewBillButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+         int[] selectedRow = jTable1.getSelectedRows();
+        DataEntryForm2 dataEntryForm2=new DataEntryForm2(jTable1.getValueAt(selectedRow[0], 1).toString(),
+        jTable1.getValueAt(selectedRow[0],2).toString(),jTable1.getValueAt(selectedRow[0],0).toString());
+        dataEntryForm2.setVisible(true);
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteActionPerformed
 
     public  void loadData(Boolean type){
         String sql="";
         if(type){
-             sql = "SELECT * FROM jenudai where flag=1";
+             sql = "SELECT Date,invoice,customer,type,total,cash,credit FROM jenudai where flag=1";
         }
         else{
-             sql="SELECT * FROM jenudai where Date='"+new java.sql.Date(jDateChooser1.getDate().getTime())+"' AND flag=1";
-             System.out.println(sql);
+             sql="SELECT Date,invoice,customer,type,total,cash,credit FROM jenudai where Date='"+new java.sql.Date(jDateChooser1.getDate().getTime())+"' AND flag=1";
         }
        try{
             Statement  stmt = conn.createStatement();
@@ -213,12 +253,14 @@ public class ViewRecords extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton Delete;
+    private javax.swing.JButton addAmountButton;
+    private javax.swing.JButton allButton;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton loadButton;
+    private javax.swing.JButton updateButton;
+    private javax.swing.JButton viewBillButton;
     // End of variables declaration//GEN-END:variables
 }

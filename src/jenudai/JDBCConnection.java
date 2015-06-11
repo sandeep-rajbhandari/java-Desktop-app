@@ -132,7 +132,7 @@ public  class JDBCConnection {
         if(groupBy==null){
             sql = "select * from jenudai WHERE flag="+flag+" AND invoice="+actualQuery;
         }else{
-             sql = "select "+actualQuery+" from jenudai WHERE flag="+flag+" group by "+groupBy;
+             sql = "select "+actualQuery+" from jenudai WHERE flag="+flag+" group by "+groupBy;  
   
         }
         System.out.println("sql"+sql);
@@ -151,8 +151,54 @@ public  class JDBCConnection {
    }  
     }
 
-   
 
+public static int customLoadData(javax.swing.JTable name,javax.swing.JTextField cash,String invoice){
+    
+ try{
+           Statement stmt = conn.createStatement();
+      String sql;
+      sql ="select * from jenudai WHERE flag=0 AND invoice="+invoice;
+      ResultSet rs = stmt.executeQuery(sql); 
+      int i=0;
 
-}//end FirstExample
+      //STEP 5: Extract data from result set
+      while(rs.next()){
+         name.setValueAt(rs.getString("goods"), i, 0);
+         name.setValueAt(rs.getString("pricePerUnit"), i, 1);
+         name.setValueAt(rs.getString("qty"), i, 2);
+         name.setValueAt(rs.getString("total"), i, 3);
+         i++;
+      }
+      sql="select * from jenudai WHERE flag=1 AND invoice="+invoice+" ORDER BY id";
+       rs = stmt.executeQuery(sql); 
 
+      while(rs.next()){
+          cash.setText(rs.getString("cash"));
+          return rs.getInt("id");
+          
+      }
+        }  
+        catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+        }
+        return -1;
+}
+
+public static void delete(String invoice,int id){
+    try{
+           Statement stmt = conn.createStatement();
+           String sql="DELETE FROM jenudai where invoice="+invoice;
+
+       stmt.executeUpdate(sql); 
+        sql="DELETE FROM jenudai where id="+id;
+       stmt.executeUpdate(sql); 
+   }  
+        catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+        }
+    
+    
+}
+}

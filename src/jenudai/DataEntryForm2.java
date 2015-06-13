@@ -31,6 +31,7 @@ public class DataEntryForm2 extends javax.swing.JFrame {
     float totalAmount=0;
     DefaultTableModel model;
     boolean isUpdate=false;
+    boolean isCashOnly=false;
     int id=0;
     public DataEntryForm2() {
         initComponents();
@@ -52,6 +53,7 @@ public class DataEntryForm2 extends javax.swing.JFrame {
 //        JDBCConnection.populate(customerdrop, "customer");
         invoicebox.setText(invoice);
         customerBox.setText(Customer);
+        isCashOnly=true;
         jTable1.disable();
 
     }
@@ -363,7 +365,7 @@ public class DataEntryForm2 extends javax.swing.JFrame {
         }
         try{
         PreparedStatement updateemp = JDBCConnection.conn.prepareStatement
-        ("insert into jenudai(Date,invoice,goods,qty,customer,type,pricePerUnit,total,flag,cash,credit) values(?,?,?,?,?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+        ("insert into jenudai(Date,invoice,customer,type,goods,qty,pricePerUnit,total,flag,cash,credit) values(?,?,?,?,?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
         updateemp.setDate(1,date);
         updateemp.setString(2,invoice);
         updateemp.setString(3,null);
@@ -374,7 +376,12 @@ public class DataEntryForm2 extends javax.swing.JFrame {
         updateemp.setFloat(8,totalAmount);
         updateemp.setInt(9,1);
         updateemp.setFloat(10,getFloat(cash.getText()));
+        if(!isCashOnly){
         updateemp.setFloat(11,-(totalAmount-getFloat(cash.getText())));
+        }else{
+        updateemp.setFloat(11,0);
+
+        }
         updateemp.executeUpdate();
             
         }catch(SQLException se){

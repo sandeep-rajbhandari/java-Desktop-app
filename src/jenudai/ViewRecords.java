@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
+import java.util.Calendar;
 import javax.swing.table.TableModel;
 import static jenudai.JDBCConnection.conn;
 import net.proteanit.sql.DbUtils;
@@ -24,6 +25,10 @@ public class ViewRecords extends javax.swing.JFrame {
      */
     public ViewRecords() {
         initComponents();
+        Calendar today = Calendar.getInstance();
+
+        jDateChooser1.setDate(today.getTime());
+
         
     }
 
@@ -114,10 +119,10 @@ public class ViewRecords extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addAmountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addComponent(addAmountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(viewBillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(allButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,7 +146,8 @@ public class ViewRecords extends javax.swing.JFrame {
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loadButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -155,16 +161,35 @@ public class ViewRecords extends javax.swing.JFrame {
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         // TODO add your handling code here
-        loadData(false);
+        try{
+           new java.sql.Date(jDateChooser1.getDate().getTime());
+           loadData(false);
+
+        }
+        catch(Exception e){
+          Popup popup=new Popup("please select date");
+            popup.setVisible(true);
+            popup.setDefaultCloseOperation(DISPOSE_ON_CLOSE);  
+        }
         
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void addAmountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAmountButtonActionPerformed
         // TODO add your handling code here:
         int[] selectedRow = jTable1.getSelectedRows();
+        try{
         DataEntryForm2 dataEntryForm2=new DataEntryForm2(jTable1.getValueAt(selectedRow[0], 1).toString(),
                 jTable1.getValueAt(selectedRow[0],2).toString());
         dataEntryForm2.setVisible(true);
+        dataEntryForm2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        }catch(Exception e){
+            Popup popup=new Popup("please select one row");
+            popup.setVisible(true);
+            popup.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+            System.out.println("not selected");
+        }
     }//GEN-LAST:event_addAmountButtonActionPerformed
 
     private void viewBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBillButtonActionPerformed
@@ -178,6 +203,10 @@ public class ViewRecords extends javax.swing.JFrame {
           JDBCConnection.loadData(jTable1, jTable1.getValueAt(0,1).toString(), null, 0);
              }
              catch(Exception b){
+                 Popup popup=new Popup("Data not available OR please select one row");
+                 popup.setVisible(true);
+                 popup.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
                  System.out.println("data not loaded");
              }
          }
@@ -187,9 +216,17 @@ public class ViewRecords extends javax.swing.JFrame {
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
          int[] selectedRow = jTable1.getSelectedRows();
+         try{
         DataEntryForm2 dataEntryForm2=new DataEntryForm2(jTable1.getValueAt(selectedRow[0], 1).toString(),
         jTable1.getValueAt(selectedRow[0],2).toString(),jTable1.getValueAt(selectedRow[0],0).toString());
         dataEntryForm2.setVisible(true);
+        dataEntryForm2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+         }catch(Exception e){
+             Popup popup=new Popup("Data not available OR please select one row");
+                 popup.setVisible(true);
+                 popup.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+         }
+
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
